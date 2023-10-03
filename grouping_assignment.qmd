@@ -114,9 +114,6 @@ AMERICAN MADE MEDIA CONSULTANTS, LLC was paid the most
 ```{r}
 
 
-payments %>%
-  group_by(recipient_name) %>%
-  summarise(n())
 
 
 
@@ -137,9 +134,7 @@ Look at what this recipient was paid for. What service or good (see the "disburs
 What's the most common category overall (see "disbursement_description") the campaign spent money on?
 
 ```{r}
-payments %>%
-  group_by(disbursement_description) %>%
-  summarise(n())
+
 
 
 
