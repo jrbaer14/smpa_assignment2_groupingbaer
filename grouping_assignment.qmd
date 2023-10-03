@@ -78,13 +78,14 @@ Without doing any analysis yet, what are three questions you might try to answer
 <br>
 
 How much was spent in the 2017 vs. 2018 reporting year?
+
 In 2017,$17082338 was spent. In 2018, $37212716	was spent. I found these numbers by grouping the data based upon year (separating it out). And then was able to count the totals by summarizing based on the total sums of disbursements for each year.
 
 ```{r}
 
 payments %>%
   group_by(disbursement_year) %>%
-  summarise(total_disbursement= sum(disbursement_amount))
+  summarise(total_disbursement = sum(disbursement_amount))
 
 
   
@@ -97,11 +98,12 @@ payments %>%
 
 Tally the total overall disbursement amounts for each month (distinguishing between say, Oct. 2018 v. Oct. 2019). In which month was spending the highest?
 
+October 2018 had the highest spending of $9738567.6. I found this by again grouping by disbursement year but also incorporating disbursement month to differentiate between the various months. I again used the summarize function to count the sums of disbursment amounts.
 ```{r}
 
 payments %>%
   group_by(disbursement_month, disbursement_year) %>%
-  summarise(total_disbursement= sum(disbursement_amount))
+  summarise(total_disbursement = sum(disbursement_amount))
 
 
 
@@ -109,11 +111,15 @@ payments %>%
 ```
 
 Which recipient (recipient_name) was paid the most in the 2020 election cycle?
-AMERICAN MADE MEDIA CONSULTANTS, LLC was paid the most 
-
+ 
+AMERICAN MADE MEDIA CONSULTANTS, LLC was the highest paid at $9772583.64. I figured this out by grouping by recipient name this time (to combine all of the charges into each respective recipient). From there I used the summary function to count the sums of the disbursement amounts.
 ```{r}
 
 
+payments %>%
+  group_by(recipient_name) %>%
+  summarise(total_disbursement = sum(disbursement_amount)) %>%
+  arrange(desc(total_disbursement))
 
 
 
@@ -122,9 +128,13 @@ AMERICAN MADE MEDIA CONSULTANTS, LLC was paid the most
 
 Look at what this recipient was paid for. What service or good (see the "disbursement_description") were they paid the most for?
 
+They were paid the most for placed media, $4334158.34. I figured this out by filtering for the recipient name variable and inserting AMERICAN MADE MEDIA CONSULTANTS, LLC. I then grouped based on disbursement description and summarized based on the sum total of disbursement amount for each description.
 ```{r}
 
-
+payments %>%
+  filter (recipient_name == "AMERICAN MADE MEDIA CONSULTANTS, LLC") %>%
+  group_by(disbursement_description) %>%
+  summarise(total_disbursement = sum(disbursement_amount))
 
 
 
@@ -133,9 +143,13 @@ Look at what this recipient was paid for. What service or good (see the "disburs
 
 What's the most common category overall (see "disbursement_description") the campaign spent money on?
 
+Merchant fees was the most common category (1002 times). I determined this by grouping based on description and then summarizing to get a straightfoward count. I then arranged my data in descending order.
 ```{r}
 
-
+payments %>%
+  group_by(disbursement_description) %>%
+  summarise( count = n ()) %>%
+  arrange(desc(count))
 
 
 
