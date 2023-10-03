@@ -143,7 +143,7 @@ payments %>%
 
 What's the most common category overall (see "disbursement_description") the campaign spent money on?
 
-Merchant fees was the most common category (1002 times). I determined this by grouping based on description and then summarizing to get a straightfoward count. I then arranged my data in descending order.
+Merchant fees was the most common category (1002 times). I determined this by grouping based on description and then summarizing to get a straightfoward count. I then arranged my data in descending order. 
 ```{r}
 
 payments %>%
