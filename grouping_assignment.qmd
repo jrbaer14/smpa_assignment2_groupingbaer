@@ -26,7 +26,7 @@ A dataset of disbursements (payments and purchases) by the Donald J. Trump for P
 
 This data and examples were developed as part of the NYT Open training, which we've adapted from here. Note that the dataset has been alterted for instructional purposes, so doesn't represent the original FEC data in its entirety.
 
-In the environment tab in the upper right, click on the `payments` dataset to open the RStudio viewer to examine the data. You can also run the chunk below as well to bring up a slice of the data.  
+In the environment tab in the upper right, click on the `payments` dataset to open the RStudio viewer to examine the data. You can also run the chunk below as well to bring up a slice of the data.   
 
 ```{r}
 
