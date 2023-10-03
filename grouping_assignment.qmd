@@ -26,7 +26,7 @@ A dataset of disbursements (payments and purchases) by the Donald J. Trump for P
 
 This data and examples were developed as part of the NYT Open training, which we've adapted from here. Note that the dataset has been alterted for instructional purposes, so doesn't represent the original FEC data in its entirety.
 
-In the environment tab in the upper right, click on the `payments` dataset to open the RStudio viewer to examine the data. You can also run the chunk below as well to bring up a slice of the data.
+In the environment tab in the upper right, click on the `payments` dataset to open the RStudio viewer to examine the data. You can also run the chunk below as well to bring up a slice of the data.  
 
 ```{r}
 
@@ -211,6 +211,7 @@ payments %>%
 For the indvidual who was paid the most, which payment category (disbursement_description) was the top one for him or her? And how much money were they paid in that category?
 
 Michael Glassner was paid $499000.00 in the payroll category. I calculated this by filtering for payee last name and substituting in Glassner. I then grouped by disbursement description to combine all of the similar categories. From there I added up the total disbursements by using the summarise function.
+
 
 
 ```{r}
