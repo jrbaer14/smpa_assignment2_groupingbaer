@@ -1,6 +1,6 @@
 ---
 title: "SMPA - Grouping Assignment"
-author: "YourNameHere"
+author: "Jenna Baer"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -61,11 +61,11 @@ Take a moment to look at the various categories included for each disbursement.
 
 Without doing any analysis yet, what are three questions you might try to answer using this dataset? Write your narrative answers in the spaces below.
 
-1.  
+1.  I would look to see the total disbursements of each month to determine a pattern in spending. I want to know if the campaign is increasing the amount they spend over time,as election day approaches.
 
-2.  
+2.  I would also want to determine who is receiving the most money from the campaign (which company/ person)?
 
-3.  
+3.  Finally, I would like to know what cities the campaign is infusing cash into with their business.
 
 ## Coding Assignment Questions
 
@@ -78,10 +78,16 @@ Without doing any analysis yet, what are three questions you might try to answer
 <br>
 
 How much was spent in the 2017 vs. 2018 reporting year?
+In 2017,$17082338 was spent. In 2018, $37212716	was spent. I found these numbers by grouping the data based upon year (separating it out). And then was able to count the totals by summarizing based on the total sums of disbursements for each year.
 
 ```{r}
 
+payments %>%
+  group_by(disbursement_year) %>%
+  summarise(total_disbursement= sum(disbursement_amount))
 
+
+  
 
 
 
@@ -93,7 +99,9 @@ Tally the total overall disbursement amounts for each month (distinguishing betw
 
 ```{r}
 
-
+payments %>%
+  group_by(disbursement_month, disbursement_year) %>%
+  summarise(total_disbursement= sum(disbursement_amount))
 
 
 
@@ -101,11 +109,14 @@ Tally the total overall disbursement amounts for each month (distinguishing betw
 ```
 
 Which recipient (recipient_name) was paid the most in the 2020 election cycle?
+AMERICAN MADE MEDIA CONSULTANTS, LLC was paid the most 
 
 ```{r}
 
 
-
+payments %>%
+  group_by(recipient_name) %>%
+  summarise(n())
 
 
 
@@ -126,7 +137,9 @@ Look at what this recipient was paid for. What service or good (see the "disburs
 What's the most common category overall (see "disbursement_description") the campaign spent money on?
 
 ```{r}
-
+payments %>%
+  group_by(disbursement_description) %>%
+  summarise(n())
 
 
 
