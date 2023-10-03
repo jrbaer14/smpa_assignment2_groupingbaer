@@ -158,7 +158,20 @@ payments %>%
 
 Who were the 5 biggest recipients of campaign spending on "LEGAL CONSULTING"..?
 
+JONES DAY	$4390351.66	
+LAROCCA HORNIK ROSEN GREENBERG & BLAHA LLP	$404774.48	
+KASOWITZ, BENSON, TORRESS & FRIEDMAN	$322614.29	
+THE LAW OFFICES OF ALAN S. FUTERFAS	$287924.00	
+MCDERMOTT WILL & EMERY	$276278.06
+
+I figured this out by filtering for legal consulting, then grouping based on the recipient name (because a lot of recipients received multiple payments). From there I calculated the totals that each legal consulting firm received by using the summarise function. I then arranged these totals in descending order to get the top 5.
 ```{r}
+
+payments %>%
+  filter(disbursement_description == "LEGAL CONSULTING") %>%
+  group_by(recipient_name) %>%
+  summarise(total_disbursement = sum(disbursement_amount)) %>%
+  arrange(desc(total_disbursement))
 
 
 
@@ -171,8 +184,21 @@ Who were the 5 biggest recipients of campaign spending on "LEGAL CONSULTING"..?
 
 Who are the top 5 individuals (vs. organization) were paid by the campaign committee?
 
+Top 5 individuals:
+Michael GLassner: $511280.00	
+SEAN	DOLLMAN:	$389541.09	
+DARREN	CENTINELLO:	$214934.25	
+CHRISTOPHER	CARR:	$160000.00	
+JOHN	PENCE:	$104244.03
+
+I filtered for only individuals so I could parse out the top 5 highest paid. From there I grouped by first and last name to condense the people received multiple payments. I then counted up the payments by using the sum function to add up the disbursement amounts. From there I arranged in descending order to figure out the top 5.
 ```{r}
 
+payments %>%
+  filter(entity_type_desc == "INDIVIDUAL") %>%
+  group_by(payee_first_name, payee_last_name) %>%
+  summarise(total_disbursement = sum(disbursement_amount)) %>%
+  arrange(desc(total_disbursement))
 
 
 
@@ -184,10 +210,16 @@ Who are the top 5 individuals (vs. organization) were paid by the campaign commi
 
 For the indvidual who was paid the most, which payment category (disbursement_description) was the top one for him or her? And how much money were they paid in that category?
 
+Michael Glassner was paid $499000.00 in the payroll category. I calculated this by filtering for payee last name and substituting in Glassner. I then grouped by disbursement description to combine all of the similar categories. From there I added up the total disbursements by using the summarise function.
+
+
 ```{r}
 
 
-
+payments %>%
+  filter(payee_last_name == "GLASSNER") %>%
+  group_by(disbursement_description) %>%
+  summarise(total_disbursement = sum(disbursement_amount))
 
 
 
